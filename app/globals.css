@@ -1,0 +1,12 @@
+// app/globals.css
+@tailwind base; @tailwind components; @tailwind utilities;
+
+
+button.primary{ @apply w-full h-14 rounded-2xl text-lg font-bold shadow bg-black text-white; }
+.card{ @apply rounded-2xl p-4 shadow border border-gray-100; }
+
+
+@media print {
+.no-print{ display: none !important; }
+body{ color: #000; background: #fff; }
+}
