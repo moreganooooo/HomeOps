@@ -3,16 +3,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { format, startOfWeek } from 'date-fns'
-// Adjust to your repo paths
 import { db } from '@/lib/db'
+
+type GroceryItem = { id: string; weekStart: string; name: string; qty: number; unit?: string; section?: string; checked?: boolean }
+const SECTION_ORDER = ['Produce','Meat','Dairy','Bakery','Pantry','Frozen','Household','Other'] as const
 
 export default function GroceryList(){
   const now = new Date()
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState<GroceryItem[]>([])
   const [prefs, setPrefs] = useState<{ startOfWeek?: number } | null>(null)
-
-  // quick-add form
   const [name, setName] = useState('')
   const [qty, setQty] = useState<number | ''>('')
   const [unit, setUnit] = useState('')
@@ -91,10 +91,10 @@ export default function GroceryList(){
       <div className="card">
         <div className="font-semibold">Quick add</div>
         <div className="mt-2 grid grid-cols-2 gap-2">
-          <input value={name} onChange={e=> setName(e.target.value)} placeholder="Item" className="h-12 rounded-2xl border px-3"/>
-          <input value={qty} onChange={e=> setQty(e.target.value ? Number(e.target.value) : '')} placeholder="Qty" type="number" className="h-12 rounded-2xl border px-3"/>
-          <input value={unit} onChange={e=> setUnit(e.target.value)} placeholder="Unit" className="h-12 rounded-2xl border px-3"/>
-          <select value={section} onChange={e=> setSection(e.target.value)} className="h-12 rounded-2xl border px-3">
+          <input aria-label="Item name" value={name} onChange={e=> setName(e.target.value)} placeholder="Item" className="h-12 rounded-2xl border px-3"/>
+          <input aria-label="Quantity" value={qty} onChange={e=> setQty(e.target.value ? Number(e.target.value) : '')} placeholder="Qty" type="number" className="h-12 rounded-2xl border px-3"/>
+          <input aria-label="Unit" value={unit} onChange={e=> setUnit(e.target.value)} placeholder="Unit" className="h-12 rounded-2xl border px-3"/>
+          <select aria-label="Section" value={section} onChange={e=> setSection(e.target.value)} className="h-12 rounded-2xl border px-3">
             {SECTION_ORDER.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
@@ -113,6 +113,7 @@ export default function GroceryList(){
                   className="h-6 w-6 rounded border-gray-300"
                   checked={Boolean(it.checked)}
                   onChange={e=> toggle(it.id, e.currentTarget.checked)}
+                  aria-label={`Mark bought: ${it.name}`}
                 />
                 <div className="flex-1">
                   <div className="text-base">{it.name}</div>
@@ -127,9 +128,6 @@ export default function GroceryList(){
   )
 }
 
-// Helpers -------------------------------------------------------------------
-const SECTION_ORDER = ['Produce','Meat','Dairy','Bakery','Pantry','Frozen','Household','Other'] as const
-
 function groupBySection(items: GroceryItem[]): Record<string, GroceryItem[]>{
   const map: Record<string, GroceryItem[]> = {}
   for (const it of items){
@@ -142,7 +140,3 @@ function groupBySection(items: GroceryItem[]): Record<string, GroceryItem[]>{
   }
   return map
 }
-
-type GroceryItem = { id: string; weekStart: string; name: string; qty: number; unit?: string; section?: string; checked?: boolean }
-
-
