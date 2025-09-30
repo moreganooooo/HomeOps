@@ -1,4 +1,3 @@
-// lib/sw-register.ts — register SW globally + handle updates
 export function registerSW(){
 if (typeof window === 'undefined') return
 if (!('serviceWorker' in navigator)) return

@@ -7,12 +7,10 @@ const day = date.getDay() // 0..6, Sun..Sat
 return day>=1 && day<=5
 }
 
-
 // lib/zones.ts
 export function zoneIndexFor(isoWeek: number, zonesLen: number){
 return isoWeek % zonesLen
 }
-
 
 // lib/groceries.ts (normalize & sum)
 export function consolidate(items: {name:string, qty:number, unit?:string, section?:string}[]){

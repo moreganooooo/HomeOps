@@ -1,4 +1,3 @@
-// components/OfflineBanner.tsx — shows when offline
 'use client'
 import { useEffect, useState } from 'react'
 export default function OfflineBanner(){

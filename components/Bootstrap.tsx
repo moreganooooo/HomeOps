@@ -1,4 +1,3 @@
-// components/Bootstrap.tsx — one-time local seed for prefs/members/zones
 'use client'
 import { useEffect } from 'react'
 import { db } from '@/lib/db'

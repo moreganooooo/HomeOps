@@ -1,4 +1,3 @@
-// lib/push.ts — minimal push helpers (works once a service worker exists)
 export async function getPushStatus(){
 if (typeof window === 'undefined') return { supported: false as const, permission: 'unknown' as const }
 const supported = 'serviceWorker' in navigator && 'PushManager' in window
@@ -6,14 +5,12 @@ const permission = (Notification?.permission ?? 'default') as 'granted'|'denied'
 return { supported, permission: permission === 'default' ? 'prompt' : permission }
 }
 
-
 export async function ensureServiceWorker(){
 if (!('serviceWorker' in navigator)) throw new Error('Service worker not supported')
 let reg = await navigator.serviceWorker.getRegistration()
 if (!reg) reg = await navigator.serviceWorker.register('/sw.js')
 return reg
 }
-
 
 export async function subscribePush(){
 const reg = await ensureServiceWorker()
@@ -27,7 +24,6 @@ await fetch(`${url}/subscribe`, { method:'POST', headers:{'content-type':'applic
 return sub
 }
 
-
 export async function unsubscribePush(){
 const reg = await navigator.serviceWorker.getRegistration()
 const sub = await reg?.pushManager.getSubscription()
@@ -40,7 +36,6 @@ await sub.unsubscribe()
 }
 }
 }
-
 
 function urlBase64ToUint8Array(base64String: string) {
 const padding = '='.repeat((4 - (base64String.length % 4)) % 4)

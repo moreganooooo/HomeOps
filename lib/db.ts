@@ -1,7 +1,6 @@
 // lib/db.ts (full schema: matches spec + components)
 import Dexie, { Table } from 'dexie'
 
-
 export interface Member { id: string; name: string; color: string; role?: string; isChild?: boolean }
 export interface Prefs { id: 'prefs'; timezone: string; startOfWeek: number; activeWeekType: 1|2; zoneIndex: number }
 export interface Zone { id: string; name: string; subtasks: string[] }
@@ -10,7 +9,6 @@ export interface MealWeek { weekStart: string; weekType: 1|2; sundayPrepDone: bo
 export interface DinnerCard { id: string; weekStart: string; day: string; title: string; notes?: string }
 export interface GroceryItem { id: string; weekStart: string; name: string; qty: number; unit?: string; section?: string; checked?: boolean }
 export interface LunchPlan { id: string; weekType: 1|2; day: string; item: string }
-
 
 export class HomeOpsDB extends Dexie {
 members!: Table<Member, string>
@@ -21,7 +19,6 @@ mealWeeks!: Table<MealWeek, string>
 dinnerCards!: Table<DinnerCard, string>
 groceries!: Table<GroceryItem, string>
 lunches!: Table<LunchPlan, string>
-
 
 constructor(){
 super('homeOps')
@@ -37,6 +34,5 @@ lunches: 'id,weekType,day',
 })
 }
 }
-
 
 export const db = new HomeOpsDB()
