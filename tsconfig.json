@@ -13,6 +13,7 @@
     "allowJs": false,
     "strict": true,
     "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
