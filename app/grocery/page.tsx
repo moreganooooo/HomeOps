@@ -1,4 +1,3 @@
-// app/print/grocery/page.tsx
 'use client'
 import React, { useEffect, useMemo, useState } from 'react'
 import { format, startOfWeek } from 'date-fns'

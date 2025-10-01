@@ -1,0 +1,16 @@
+{
+  "name": "homeops-calendar-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "types:check": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.2025.2.0",
+    "typescript": "^5.9.2",
+    "wrangler": "^3.80.0"
+  }
+}

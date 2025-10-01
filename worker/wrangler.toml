@@ -1,0 +1,9 @@
+# worker/wrangler.toml — example config (edit the account + KV IDs)
+name = "homeops-calendar"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+
+
+kv_namespaces = [
+{ binding = "HOMEOPS_KV", id = "YOUR_KV_ID", preview_id = "YOUR_KV_PREVIEW_ID" }
+]
